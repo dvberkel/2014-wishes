@@ -33,6 +33,10 @@
 	context.restore();
     }
 
+    var curves = {
+	koch : function(stage){ return new Curve(stage, [0, 1, -2, 1], Math.PI/3, 3); }
+    }
+
     var body = document.getElementsByTagName('body')[0];
 
     var canvas = document.createElement('canvas');
@@ -49,7 +53,7 @@
     context.save();
     context.translate(0, 10);
 
-    var koch = new Curve(7, [0, 1, -2, 1], Math.PI/3, 3);
+    var koch = new curves.koch(7);
     koch.drawOn(context, { strokeStyle: 'white', lineWidth: 1 });
 
     context.restore();
