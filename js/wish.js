@@ -17,24 +17,27 @@
     context.save();
     context.translate(0, 10);
 
+
+    var stage = 3;
+    var multipliers = [0, 1, -2, 1];
+    var baseAngle = Math.PI/3;
+    var unit = canvas.width/ Math.pow(3, stage);
+    var m = multipliers.length;
+
     context.save();
 
     context.strokeStyle = 'white';
     context.lineWidth = 1;
 
-    var stage = 5;
-    var unit = canvas.width/ Math.pow(3, stage);
-
     context.beginPath();
     context.moveTo(0, 0);
-    var multipliers = [0, 1, -2, 1];
-    for (var index = 0; index < Math.pow(4, stage); index++) {
+    for (var index = 0, total = Math.pow(m, stage); index < total; index++) {
 	var phase = index;
-	while (phase > 0 && phase % 4 == 0) {
-	    phase = phase / 4;
+	while (phase > 0 && phase % m == 0) {
+	    phase = phase / m;
 	}
-	var multiplier = multipliers[phase % 4];
-	var angle = multiplier * Math.PI/3;
+	var multiplier = multipliers[phase % m];
+	var angle = multiplier * baseAngle;
 	context.rotate(angle)
 	context.translate(unit, 0);
 	context.lineTo(0, 0);
