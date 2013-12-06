@@ -64,19 +64,19 @@
     context.strokeStyle = 'white';
     context.lineWidth = 1;
 
-    var n = 4;
-    var unit = canvas.width/ Math.pow(3, n);
+    var stage = 5;
+    var unit = canvas.width/ Math.pow(3, stage);
 
     context.beginPath();
     context.moveTo(0, 0);
-    var proto = [0, 1, -2, 1];
-    for (index = 0; index < Math.pow(4, n); index++) {
-	var m = index;
-	while (m > 0 && m % 4 == 0) {
-	    m = m / 4;
+    var multipliers = [0, 1, -2, 1];
+    for (var index = 0; index < Math.pow(4, stage); index++) {
+	var phase = index;
+	while (phase > 0 && phase % 4 == 0) {
+	    phase = phase / 4;
 	}
-	var i = proto[m % 4];
-	var angle = i * Math.PI/3;
+	var multiplier = multipliers[phase % 4];
+	var angle = multiplier * Math.PI/3;
 	context.rotate(angle)
 	context.translate(unit, 0);
 	context.lineTo(0, 0);
