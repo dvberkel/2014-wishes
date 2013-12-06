@@ -34,7 +34,8 @@
     }
 
     var curves = {
-	koch : function(stage){ return new Curve(stage, [0, 1, -2, 1], Math.PI/3, 3); }
+	koch : function(stage){ return new Curve(stage, [0, 1, -2, 1], Math.PI/3, 3); },
+	kochLike: function(stage, angle){ return new Curve(stage, [0, 1, -2, 1], angle, 2*(1 + Math.cos(angle))); }
     }
 
     var body = document.getElementsByTagName('body')[0];
@@ -53,7 +54,8 @@
     context.save();
     context.translate(0, 10);
 
-    var koch = new curves.koch(7);
+    var delta = -Math.PI/10;
+    var koch = new curves.kochLike(5, Math.PI/3+delta);
     koch.drawOn(context, { strokeStyle: 'white', lineWidth: 1 });
 
     context.restore();
