@@ -49,14 +49,22 @@
     context.translate(0, canvas.height);
     context.scale(1, -1);
 
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    function drawCurve(t) {
+	context.save();
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	var period = 12 * 1000;
+	var alpha = 2 * Math.PI * (new Date()).getTime() / period;
+	context.translate(0, 10);
 
-    context.save();
-    context.translate(0, 10);
+	var koch = new curves.kochLike(5, Math.PI/4 * (1 - Math.cos(alpha)));
+	koch.drawOn(context, { strokeStyle: 'white', lineWidth: 1 });
+	context.restore();
+    }
 
-    var delta = -Math.PI/10;
-    var koch = new curves.kochLike(5, Math.PI/3+delta);
-    koch.drawOn(context, { strokeStyle: 'white', lineWidth: 1 });
+    function continuous(){
+	drawCurve((new Date()).getTime());
+	requestAnimationFrame(continuous);
+    }
+    continuous();
 
-    context.restore();
 })();
