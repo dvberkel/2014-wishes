@@ -22,20 +22,16 @@
     context.strokeStyle = 'white';
     context.lineWidth = 2;
 
+    var unit = canvas.width/3;
+
     context.beginPath();
     context.moveTo(0, 0);
-    context.rotate(0)
-    context.translate(canvas.width/3, 0);
-    context.lineTo(0, 0);
-    context.rotate(Math.PI/3)
-    context.translate(canvas.width/3, 0);
-    context.lineTo(0, 0);
-    context.rotate(-2*Math.PI/3)
-    context.translate(canvas.width/3, 0);
-    context.lineTo(0, 0);
-    context.rotate(Math.PI/3)
-    context.translate(canvas.width/3, 0);
-    context.lineTo(0, 0);
+    [0, 1, -2, 1].forEach(function(angle){
+	angle *= Math.PI/3;
+	context.rotate(angle)
+	context.translate(unit, 0);
+	context.lineTo(0, 0);
+    });
 
     context.stroke();
 
