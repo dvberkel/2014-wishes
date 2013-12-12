@@ -49,17 +49,25 @@
     context.translate(0, canvas.height);
     context.scale(1, -1);
 
-    function drawCurve(t) {
-	context.save();
-	context.fillRect(0, 0, canvas.width, canvas.height);
+    drawCurve = (function(){
+	var start = (new Date()).getTime();
 	var period = 12 * 1000;
-	var alpha = 2 * Math.PI * (new Date()).getTime() / period;
-	context.translate(0, 10);
 
-	var koch = new curves.kochLike(5, Math.PI/4 * (1 - Math.cos(alpha)));
-	koch.drawOn(context, { strokeStyle: 'white', lineWidth: 1 });
-	context.restore();
-    }
+	function number(t) {
+	    return 1 + Math.floor((t - start)/period) % 6
+	}
+
+	return function drawCurve(t) {
+	    context.save();
+	    context.fillRect(0, 0, canvas.width, canvas.height);
+	    var alpha = 2 * Math.PI * (t - start) / period;
+	    context.translate(0, 10);
+
+	    var koch = new curves.kochLike(number(t), 9*Math.PI/40 * (1 - Math.cos(alpha)));
+	    koch.drawOn(context, { strokeStyle: 'white', lineWidth: 1 });
+	    context.restore();
+	}
+    })();
 
     function continuous(){
 	drawCurve((new Date()).getTime());
