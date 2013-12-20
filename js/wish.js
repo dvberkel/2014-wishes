@@ -38,6 +38,42 @@
 	kochLike: function(stage, angle){ return new Curve(stage, [0, 1, -2, 1], angle, 2*(1 + Math.cos(angle))); }
     }
 
+    var Paragraph = function(stage, messages, offsets){
+	this.stage = stage;
+	this.messages = messages;
+	this.offsets = offsets;
+    }
+    Paragraph.prototype.drawOn = function(context, options){
+	context.save();
+
+	context.fillStyle = 'black';
+	context.fillRect(0, 0, canvas.width, canvas.height);
+
+	context.restore();
+	context.save();
+
+	for(var key in (options || {})) {
+	    context[key] = options[key];
+	}
+
+	for (var index = 0; index < this.messages.length; index++){
+	    context.fillText(this.messages[index], this.offsets.indent, (index + 1) * this.offsets.baseline);
+	}
+
+	context.restore();
+	context.save();
+
+	context.translate(0, canvas.height);
+	context.scale(1, -1);
+
+	context.translate(0, 10);
+
+	var koch = new curves.koch(this.stage);
+	koch.drawOn(context, options);
+
+	context.restore();
+    };
+
     var body = document.getElementsByTagName('body')[0];
 
     var canvas = document.createElement('canvas');
@@ -46,8 +82,9 @@
     body.appendChild(canvas);
 
     context = canvas.getContext('2d');
-    context.translate(0, canvas.height);
-    context.scale(1, -1);
+
+    var paragraph = new Paragraph(1, ['Life...', 'like the undulations', 'of a river'], { 'indent': 10, 'baseline': 60 });
+    paragraph.drawOn(context, { 'fillStyle': 'white', 'font': '50px sans-serif', 'strokeStyle': 'white', 'lineWidth': '1' });
 
     drawCurve = (function(){
 	var start = (new Date()).getTime();
@@ -73,6 +110,5 @@
 	drawCurve((new Date()).getTime());
 	requestAnimationFrame(continuous);
     }
-    continuous();
-
+    //continuous();
 })();
