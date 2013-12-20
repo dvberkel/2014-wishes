@@ -81,6 +81,12 @@
     Story.prototype.drawOn = function(context, options){
 	this.paragraphs[this.currentIndex].drawOn(context, options);
     };
+    Story.prototype.next = function(){
+	this.currentIndex = Math.min(this.currentIndex + 1, this.paragraphs.length - 1);
+    }
+    Story.prototype.previous = function(){
+	this.currentIndex = Math.max(0, this.currentIndex - 1);
+    }
 
     var body = document.getElementsByTagName('body')[0];
 
@@ -92,10 +98,25 @@
     context = canvas.getContext('2d');
 
     var story = new Story([
-	new Paragraph(1, ['Life...', 'like the undulations', 'of a river'], { 'indent': 10, 'baseline': 60 }),
-	new Paragraph(2, ['flows to and fro'], { 'indent': 10, 'baseline': 60 }),
+	new Paragraph(1, ['Life...'], { 'indent': 10, 'baseline': 60 }),
+	new Paragraph(2, ['like the undulations', 'of a river'], { 'indent': 10, 'baseline': 60 }),
+	new Paragraph(3, ['flows to and fro'], { 'indent': 10, 'baseline': 60 }),
     ]);
-    story.drawOn(context, { 'fillStyle': 'white', 'font': '50px sans-serif', 'strokeStyle': 'white', 'lineWidth': '1' });
+    function drawStory() {
+	story.drawOn(context, { 'fillStyle': 'white', 'font': '50px sans-serif', 'strokeStyle': 'white', 'lineWidth': '1' });
+    }
+    drawStory();
+
+    body.addEventListener('keydown', function(event){
+	if (event.keyCode == 39) {
+	    story.next();
+	    drawStory();
+	}
+	if (event.keyCode == 37) {
+	    story.previous();
+	    drawStory();
+	}
+    });
 
     drawCurve = (function(){
 	var start = (new Date()).getTime();
