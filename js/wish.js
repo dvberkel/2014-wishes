@@ -74,6 +74,14 @@
 	context.restore();
     };
 
+    var Story = function(paragraphs){
+	this.paragraphs = paragraphs;
+	this.currentIndex = 0;
+    }
+    Story.prototype.drawOn = function(context, options){
+	this.paragraphs[this.currentIndex].drawOn(context, options);
+    };
+
     var body = document.getElementsByTagName('body')[0];
 
     var canvas = document.createElement('canvas');
@@ -83,8 +91,11 @@
 
     context = canvas.getContext('2d');
 
-    var paragraph = new Paragraph(1, ['Life...', 'like the undulations', 'of a river'], { 'indent': 10, 'baseline': 60 });
-    paragraph.drawOn(context, { 'fillStyle': 'white', 'font': '50px sans-serif', 'strokeStyle': 'white', 'lineWidth': '1' });
+    var story = new Story([
+	new Paragraph(1, ['Life...', 'like the undulations', 'of a river'], { 'indent': 10, 'baseline': 60 }),
+	new Paragraph(2, ['flows to and fro'], { 'indent': 10, 'baseline': 60 }),
+    ]);
+    story.drawOn(context, { 'fillStyle': 'white', 'font': '50px sans-serif', 'strokeStyle': 'white', 'lineWidth': '1' });
 
     drawCurve = (function(){
 	var start = (new Date()).getTime();
