@@ -108,14 +108,22 @@
     }
     drawStory();
 
+    function advanceStory() {
+	story.next();
+	drawStory();
+    }
+
+    function retreatStory() {
+	story.previous();
+	drawStory();
+    }
+
     body.addEventListener('keydown', function(event){
 	if (event.keyCode == 39) {
-	    story.next();
-	    drawStory();
+	    advanceStory();
 	}
 	if (event.keyCode == 37) {
-	    story.previous();
-	    drawStory();
+	    retreatStory();
 	}
     });
 
