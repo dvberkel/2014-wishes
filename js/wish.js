@@ -97,10 +97,11 @@
 
     context = canvas.getContext('2d');
 
+    var paragraphOptions = { 'indent': 10, 'baseline': 60 };
     var story = new Story([
-	new Paragraph(1, ['Life...'], { 'indent': 10, 'baseline': 60 }),
-	new Paragraph(2, ['like the undulations', 'of a river'], { 'indent': 10, 'baseline': 60 }),
-	new Paragraph(3, ['flows to and fro'], { 'indent': 10, 'baseline': 60 }),
+	new Paragraph(1, ['Life...'], paragraphOptions),
+	new Paragraph(2, ['like the undulations', 'of a river'], paragraphOptions),
+	new Paragraph(3, ['flows to and fro'], paragraphOptions),
     ]);
     function drawStory() {
 	story.drawOn(context, { 'fillStyle': 'white', 'font': '50px sans-serif', 'strokeStyle': 'white', 'lineWidth': '1' });
