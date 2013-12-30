@@ -77,15 +77,22 @@
     var Story = function(paragraphs){
 	this.paragraphs = paragraphs;
 	this.currentIndex = 0;
+	this.reachedEnd = false;
     }
     Story.prototype.drawOn = function(context, options){
 	this.paragraphs[this.currentIndex].drawOn(context, options);
     };
     Story.prototype.next = function(){
-	this.currentIndex = Math.min(this.currentIndex + 1, this.paragraphs.length - 1);
+	var targetIndex = this.currentIndex + 1;
+	this.reachedEnd = (targetIndex === this.paragraphs.length);
+	if (!this.reachedEnd) {
+	    this.currentIndex = Math.min(targetIndex, this.paragraphs.length - 1);
+	}
     }
     Story.prototype.previous = function(){
-	this.currentIndex = Math.max(0, this.currentIndex - 1);
+	if (!this.reachedEnd) {
+	    this.currentIndex = Math.max(0, this.currentIndex - 1);
+	}
     }
 
     var body = document.getElementsByTagName('body')[0];
@@ -109,13 +116,20 @@
     }
 
     function advanceStory() {
-	story.next();
-	drawStory();
+	if (!story.reachedEnd) {
+	    story.next();
+	    drawStory();
+	}
+	if (story.reachedEnd) {
+	    continuous();
+	}
     }
 
     function retreatStory() {
-	story.previous();
-	drawStory();
+	if (!story.reachedEnd) {
+	    story.previous();
+	    drawStory();
+	}
     }
 
     drawCurve = (function(){
@@ -130,6 +144,8 @@
 	    context.save();
 	    context.fillRect(0, 0, canvas.width, canvas.height);
 	    var alpha = 2 * Math.PI * (t - start) / period;
+	    context.translate(0, 640);
+	    context.scale(1, -1);
 	    context.translate(0, 10);
 
 	    var koch = new curves.kochLike(number(t), 9*Math.PI/40 * (1 - Math.cos(alpha)));
@@ -152,6 +168,4 @@
 	    retreatStory();
 	}
     });
-
-    //continuous();
 })();
