@@ -103,10 +103,10 @@
 	new Paragraph(2, ['like the undulations', 'of a river'], paragraphOptions),
 	new Paragraph(3, ['flows to and fro'], paragraphOptions),
     ]);
+
     function drawStory() {
 	story.drawOn(context, { 'fillStyle': 'white', 'font': '50px sans-serif', 'strokeStyle': 'white', 'lineWidth': '1' });
     }
-    drawStory();
 
     function advanceStory() {
 	story.next();
@@ -117,15 +117,6 @@
 	story.previous();
 	drawStory();
     }
-
-    body.addEventListener('keydown', function(event){
-	if (event.keyCode == 39) {
-	    advanceStory();
-	}
-	if (event.keyCode == 37) {
-	    retreatStory();
-	}
-    });
 
     drawCurve = (function(){
 	var start = (new Date()).getTime();
@@ -151,5 +142,16 @@
 	drawCurve((new Date()).getTime());
 	requestAnimationFrame(continuous);
     }
+
+    drawStory();
+    body.addEventListener('keydown', function(event){
+	if (event.keyCode == 39) {
+	    advanceStory();
+	}
+	if (event.keyCode == 37) {
+	    retreatStory();
+	}
+    });
+
     //continuous();
 })();
