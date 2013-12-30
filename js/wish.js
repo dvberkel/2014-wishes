@@ -106,9 +106,13 @@
 
     var paragraphOptions = { 'indent': 10, 'baseline': 60 };
     var story = new Story([
-	new Paragraph(1, ['Life...'], paragraphOptions),
-	new Paragraph(2, ['like the undulations', 'of a river'], paragraphOptions),
-	new Paragraph(3, ['flows to and fro'], paragraphOptions),
+	new Paragraph(1, ['Lieve Vrienden & Familie'], paragraphOptions),
+	new Paragraph(2, ['Na een jaar', 'waarin gegeven', 'en genomen is'], paragraphOptions),
+	new Paragraph(3, ['Willen wij stil staan', 'bij wat ons dierbaar is'], paragraphOptions),
+	new Paragraph(4, ['Een leven rijk aan', 'waardevolle relaties', 'en warme contacten'], paragraphOptions),
+	new Paragraph(3, ['Wij zijn jullie', 'hier enorm', 'dankbaar voor'], paragraphOptions),
+	new Paragraph(2, ['Wij wensen jullie daarom', 'een warm, liefdevol', 'en dynamisch 2014!'], paragraphOptions),
+	new Paragraph(1, ['Daan, Marlies & Sophie'], paragraphOptions),
     ]);
 
     function drawStory() {
