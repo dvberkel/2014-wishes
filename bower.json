@@ -1,0 +1,17 @@
+{
+  "name": "2014-wishes",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dvberkel/2014-wishes",
+  "authors": [
+    "Daan van Berkel <daan.v.berkel.1980@gmail.com>"
+  ],
+  "description": "a wish for the year 2014",
+  "main": "index.html",
+  "keywords": [
+    "new",
+    "year",
+    "wish"
+  ],
+  "license": "MIT",
+  "private": true
+}
