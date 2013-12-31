@@ -1,4 +1,4 @@
-(function(){
+(function(Hammer){
     var Curve = function(stage, multipliers, baseAngle, growth){
 	this.stage = stage;
 	this.multipliers = multipliers;
@@ -185,5 +185,7 @@
 	}
     });
     left.addEventListener('click', retreatStory);
-    right.addEventListener('click', advanceStory)
-})();
+    right.addEventListener('click', advanceStory);
+    Hammer(body).on('swipeleft', advanceStory);
+    Hammer(body).on('swiperight', retreatStory);
+})(Hammer);
