@@ -97,10 +97,20 @@
 
     var body = document.getElementsByTagName('body')[0];
 
+    var left = document.createElement('button');
+    left.className = 'left';
+    left.textContent = '<';
+    body.appendChild(left);
+
     var canvas = document.createElement('canvas');
     canvas.width = 640;
     canvas.height= 640;
     body.appendChild(canvas);
+
+    var right = document.createElement('button');
+    right.className = 'right';
+    right.textContent = '>';
+    body.appendChild(right);
 
     context = canvas.getContext('2d');
 
@@ -174,4 +184,6 @@
 	    retreatStory();
 	}
     });
+    left.addEventListener('click', retreatStory);
+    right.addEventListener('click', advanceStory)
 })();

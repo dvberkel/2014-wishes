@@ -9,3 +9,16 @@ canvas {
     margin: auto;
     width: 640px;
 }
+
+.left, .right {
+    position: absolute;
+    top: 0;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}
