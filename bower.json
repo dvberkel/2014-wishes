@@ -13,5 +13,8 @@
     "wish"
   ],
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "hammerjs": "~1.0.5"
+  }
 }
