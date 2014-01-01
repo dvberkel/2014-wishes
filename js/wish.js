@@ -151,15 +151,16 @@
     drawCurve = (function(){
 	var period = 12 * 1000;
 	var alpha0 = Math.acos(-13/27);
+	var t0 = alpha0 * period / (2*Math.PI);
 
 	function number(t) {
-	    return 1 + Math.floor((t - start)/period) % 6
+	    return 1 + Math.floor((t - start + t0)/period) % 6
 	}
 
 	return function drawCurve(t) {
 	    context.save();
 	    context.fillRect(0, 0, canvas.width, canvas.height);
-	    var alpha = 2 * Math.PI * (t - start) / period + alpha0;
+	    var alpha = 2 * Math.PI * (t - start + t0) / period;
 	    context.translate(0, 640);
 	    context.scale(1, -1);
 	    context.translate(0, 10);
